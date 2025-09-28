@@ -1,12 +1,43 @@
+/*  Se inicia el juego de cacería, escondiendo los huevos de pascua en este orden:
+ la matrioshka (con el blister adento con 14 huevitos de chocolate con leche)
+  y de decoración una flor con 7 pétalos, el huevoRepostero, el conejo y el huevoMixto.
+- el de mayor cantidad de calorías es la matrioshka
+- En un solo test, registrar las siguientes acciones y verificar que los test corren
+ bien:
+    - el juego registra que Ana encontró el primero de los huevos escondidos.
+    - En total quedan 3 huevos por encontrar y quedan 2 que tienen chocolate blanco 
+    - Todavía no fue encontrado el conejo
+    - Verificar la lista de los que tienen chocolate blanco, deben ser huevoRepostero y el huevoMixto
+    - Tito encuentra el huevoMixto
+    - Jose encuentra los restantes huevos
+    - Verificar que Ana y Jose quedan enfermos.
+
+*/
+
 import huevosDePascua.*
+import chicos.*
+import comienzaElJuego.*
 
-describe "group of tests" {
+describe "Prueba de huevos de pascua en juego"{
+ // method initialize(){
+   // comienzaElJuego.agregarListaHuevos([matrioshka, huevoRepostero, conejo, huevoMixto])
+    
+  //}
+  test "Ana encontró el primer huevo" {
+    comienzaElJuego.encontrarPrimerHuevo(ana)
+    //assert.that(ana.huevosComidos().contains(matrioshka))
+    assert.that((ana.huevosComidos().size()) == 1)
+  // "Quedan 3 huevos por encontrar y 2 con chocolate blanco" {
+    assert.that(comienzaElJuego.huevosEscondidos().size() == 3)
+    assert.that(comienzaElJuego.cualesConChocolateBlanco().size() == 2)
+    assert.that(comienzaElJuego.huevosEscondidos().contains(conejo))
+    assert.that(comienzaElJuego.cualesConChocolateBlanco().contains(huevoRepostero))
+    assert.that(comienzaElJuego.cualesConChocolateBlanco().contains(huevoMixto))
+    comienzaElJuego.encontrarHuevo(tito, huevoMixto)
+    comienzaElJuego.encontrarHuevo(jose, huevoRepostero)
+    assert.that(comienzaElJuego.estaEnfermo(ana))
+    assert.notThat(comienzaElJuego.estaEnfermo(jose))
+  }
 
-  test "test 1" {
-    assert.equals(50+50, 100)
-  }
-  test "test 2" {
-    assert.that(true)
-  }
 
 }
