@@ -10,7 +10,7 @@ import huevosDePascua.*
 
 object ana{
     const huevosComidos =[]
-    method huevosComidos() = huevosComidos
+   // method huevosComidos() = huevosComidos
     method comer(huevo) = huevosComidos.add(huevo)
     method estaEnfermo() {
         return
@@ -21,17 +21,20 @@ object ana{
 }
 
 object jose{
-    var huevosComidos = [] 
-    method huevosComidos() = huevosComidos
+    var ultimoHuevoComido = huevoMixto 
+    //method huevosComidos() = huevosComidos
     method comer(unHuevo) {
 
-        huevosComidos = unHuevo
+        ultimoHuevoComido = unHuevo
     }
-    method estaEnfermo() = huevosComidos.esDeChocolateAmargo()
+    method estaEnfermo() = ultimoHuevoComido.esDeChocolateAmargo()
 }
 object tito{
-    const huevosComidos =[]
-    method comer(unHuevo) = huevosComidos.add(unHuevo)
+    var huevosComidos = ningunHuevo
+    //const huevosComidos =[]
+    method comer(unHuevo){
+        huevosComidos = unHuevo
+    }
     method estaEnfermo() = false
 }
 

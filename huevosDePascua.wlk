@@ -48,7 +48,7 @@ object ningunHuevo {
 }
 
 object blisterHuevitos {
-    var property cantidadHuevitos = 14
+    var property cantidadHuevitos = 3
 
     method calorias() = cantidadHuevitos * 100 + cantidadHuevitos.div(5) * 150
     method esDeChocolateBlanco() = cantidadHuevitos >= 5
@@ -57,8 +57,13 @@ object blisterHuevitos {
 }
 
 object matrioshka {
-    var property huevoInterior = huevoMixto
+    var  huevoInterior = huevoMixto
     var property decoracion = flor
+    method cambiarHuevoInterior(unHuevo){
+
+     huevoInterior = unHuevo
+
+    }
     method calorias() = 3000 + huevoInterior.calorias() + flor.caloriasDecoracion()
     method esDeChocolateAmargo() = true
     method esDeChocolateBlanco() = huevoInterior.esDeChocolateBlanco()

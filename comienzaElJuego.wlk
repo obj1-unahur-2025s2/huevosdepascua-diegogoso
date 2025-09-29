@@ -12,15 +12,16 @@ import chicos.*
  ¿Cuales son con chocolate blanco?
 - El huevo de mayor cantidad de calorías*/
 object comienzaElJuego {
-    const huevosEscondidos = [matrioshka, conejo, huevoMixto, huevoRepostero]
+     const huevosEscondidos = [matrioshka, huevoRepostero, conejo, huevoMixto]
     //const chicos = [ana, jose, tito]
     const huevosEncontrados = []
-   // method agregarListaHuevos(listaHuevos) = huevosEscondidos.addAll(listaHuevos)
-    method huevosTotales() = huevosEscondidos.size()
+   
+    method huevosRestantes() = huevosEscondidos.size()
+    method huevosEncontrados() = huevosEncontrados
     method huevosEscondidos() = huevosEscondidos
     method huevosConChocolateBlanco() = huevosEscondidos.count({h => h.esDeChocolateBlanco()})
     method huevoNoEncontrado(huevo) = !huevosEncontrados.contains(huevo)
-    method encontrarHuevo(chico, huevo) = if (huevosEscondidos.contains(huevo)) {
+    method encontrarHuevo(chico, huevo) = if (!huevosEncontrados.contains(huevo)) {
         chico.comer(huevo)
         huevosEncontrados.add(huevo)
         huevosEscondidos.remove(huevo)
@@ -29,10 +30,11 @@ object comienzaElJuego {
         self.encontrarHuevo(chico, huevosEscondidos.first())
         
     }
-    method encontrarTodosLosHuevos(chico) = if (!huevosEscondidos.isEmpty()) {
+    method encontrarTodosLosHuevos(chico) = if (!huevosEscondidos.isEmpty()){
         const huevosPendientes = huevosEscondidos.copy()
         huevosPendientes.forEach({ huevo => self.encontrarHuevo(chico, huevo) })
-        huevosEncontrados.addAll(huevosPendientes)
+       // huevosEncontrados.clear()
+        huevosEncontrados.addAll(huevosEscondidos)
     }
     method estaEnfermo(chico) = chico.estaEnfermo()
     method huevoMayorCalorias() = huevosEscondidos.max({h => h.calorias()})

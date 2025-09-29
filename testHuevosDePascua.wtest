@@ -18,26 +18,42 @@ import huevosDePascua.*
 import chicos.*
 import comienzaElJuego.*
 
-describe "Prueba de huevos de pascua en juego"{
- // method initialize(){
-   // comienzaElJuego.agregarListaHuevos([matrioshka, huevoRepostero, conejo, huevoMixto])
+describe "Test narrativo de cacería de huevos de Pascua" {
+
+  method initialize() {
+    flor.cantidadPetalos(7)
+    blisterHuevitos.cantidadHuevitos(14)
+    matrioshka.decoracion(flor)
+    matrioshka.cambiarHuevoInterior(blisterHuevitos)
     
-  //}
-  test "Ana encontró el primer huevo" {
-    comienzaElJuego.encontrarPrimerHuevo(ana)
-    //assert.that(ana.huevosComidos().contains(matrioshka))
-    assert.that((ana.huevosComidos().size()) == 1)
-  // "Quedan 3 huevos por encontrar y 2 con chocolate blanco" {
-    assert.that(comienzaElJuego.huevosEscondidos().size() == 3)
-    assert.that(comienzaElJuego.cualesConChocolateBlanco().size() == 2)
-    assert.that(comienzaElJuego.huevosEscondidos().contains(conejo))
-    assert.that(comienzaElJuego.cualesConChocolateBlanco().contains(huevoRepostero))
-    assert.that(comienzaElJuego.cualesConChocolateBlanco().contains(huevoMixto))
-    comienzaElJuego.encontrarHuevo(tito, huevoMixto)
-    comienzaElJuego.encontrarHuevo(jose, huevoRepostero)
-    assert.that(comienzaElJuego.estaEnfermo(ana))
-    assert.notThat(comienzaElJuego.estaEnfermo(jose))
   }
+    test "Validamos que la matrioshka tenga la mayor cantidad de calorías"{
+    assert.equals(matrioshka, comienzaElJuego.huevoMayorCalorias())
+    
+  }
+     test "convinado" {
+        // Ana encuentra el primer huevo (la matrioshka)
+        comienzaElJuego.encontrarPrimerHuevo(ana)
 
-
+        // Validamos que fue efectivamente encontrado
+        assert.that(comienzaElJuego.huevosEncontrados().contains(matrioshka))
+        //Verificamos que queden 2 con chocolate blanco
+        assert.equals(2, comienzaElJuego.huevosConChocolateBlanco())
+        // Verificamos que el conejo aún no fue encontrado
+        assert.that(comienzaElJuego.huevoNoEncontrado(conejo))
+        // Verificamos que los huevos con chocolate blanco sean huevoRepostero y huevoMixto
+        assert.equals([huevoRepostero, huevoMixto], comienzaElJuego.cualesConChocolateBlanco())
+        // Tito encuentra el huevoMixto
+        comienzaElJuego.encontrarHuevo(tito, huevoMixto)
+        // José encuentra los restantes huevos (huevoRepostero y conejo)
+        comienzaElJuego.encontrarTodosLosHuevos(jose)
+        // Verificamos que Ana y José estén enfermos
+        assert.that(comienzaElJuego.estaEnfermo(ana))
+        assert.that(comienzaElJuego.estaEnfermo(jose))
+        //verificar lista de huevos encontrados
+        
+        assert.equals([matrioshka, huevoMixto, huevoRepostero, conejo], comienzaElJuego.huevosEncontrados())
+        
+     }
 }
+    
